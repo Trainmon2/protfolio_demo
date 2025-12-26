@@ -1,0 +1,1876 @@
+/* ============================================================
+   GLOBAL ROOT VARIABLES (Color System)
+============================================================ */
+:root {
+  --gold-main: #d7c8a1;   /* champagne gold */
+  --gold-light: #f0e6c8;  /* highlight */
+  --gold-dark: #7a6b52;   /* shadow */
+}
+/* ============================================================
+   RESET + BASE
+============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: "Cormorant Garamond", serif;
+  color: #f8f4ee;
+}
+
+/* Hard baseline for true dark */
+body {
+  background: transparent;
+}
+
+
+/* ============================================================
+   COSMIC BACKGROUND — NIGHT SKY + SUBTLE SPACE BLUE
+============================================================ */
+
+/* Deep-space radial gradient behind everything */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -9999;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(20, 30, 70, 0.22) 0%,
+    rgba(5, 10, 25, 0.5) 45%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+/* Soft vignette on edges for drama */
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -9998;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* Background stack container (from your HTML) */
+#background-layers {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* STARFIELD CANVAS — IMAX clarity */
+#starCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  filter: brightness(1.4) contrast(1.25);
+  opacity: 0.95;
+}
+
+/* Warm grain texture — super subtle */
+#grainTexture {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/grain_warm.png");
+  background-size: 550px;
+  background-repeat: repeat;
+  opacity: 0.04;
+  mix-blend-mode: soft-light;
+  z-index: -4;
+}
+
+/* Optional drifting dust layer (only if you add the element) */
+.dust-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -6;
+  pointer-events: none;
+  background-image: url("images/grain_warm.png");
+  opacity: 0.025;
+  filter: blur(1px);
+  animation: dustMove 140s linear infinite;
+}
+
+@keyframes dustMove {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-600px, -300px); }
+}
+
+/* We neutralize blue/gold overlays so they don’t wash out the sky.
+   They can stay in the HTML without harming anything. */
+.blue-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(60, 110, 200, 0.28) 0%,
+    rgba(25, 50, 110, 0.42) 45%,
+    rgba(10, 20, 45, 0.65) 100%
+  );
+  mix-blend-mode: multiply;
+  opacity: 1; /* FULL IMAX BLUE */
+  z-index: -2;
+}
+
+.gold-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(255, 220, 140, 0.05),
+    rgba(255, 210, 120, 0.02),
+    transparent
+  );
+  mix-blend-mode: screen;
+  opacity: 0.35; /* Much softer than blue */
+  z-index: -1;
+}
+
+
+/* Soft top glow, very subtle */
+.imax-top-glow {
+  position: absolute;
+  top: 0;
+   opacity: 0 !important;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(
+    to bottom,
+    rgba(180, 190, 255, 0.05),
+    transparent
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================================
+   GLOBAL CINEMATIC OVERLAYS
+============================================================ */
+
+.cinematic-overlays {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 500;
+}
+
+/* Very light blue grain */
+.film-grain-blue {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/grain_blue.png");
+  background-size: 620px;
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+}
+
+/* Very light warm grain */
+.film-grain-warm {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/grain_warm.png");
+  background-size: 620px;
+  opacity: 0;
+  mix-blend-mode: soft-light;
+}
+
+/* Optional extra grain layer inside posters/sections */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/grain_warm.png");
+  background-size: 600px;
+  background-repeat: repeat;
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* Dark filter kept tiny */
+.dark-cinematic-filter {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.05);
+  mix-blend-mode: multiply;
+}
+
+/* Vignette on very top */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 20, 0.46)
+  );
+  z-index: 520;
+}
+
+/* ============================================================
+   TRANSPARENT IMAX NAV BAR — GOLD OUTLINE + GLASS EFFECT
+============================================================ */
+.site-header {
+  width: 100%;
+  padding: 18px 8%;
+  position: fixed;
+  top: 0;
+  z-index: 900;
+
+  /* Transparent glass */
+  background: rgba(10, 10, 20, 0.25);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+
+  /* Gold bottom border */
+  border-bottom: 1px solid rgba(247, 217, 138, 0.35);
+
+  /* Soft gold outer glow */
+  box-shadow:
+    0 0 10px rgba(247, 217, 138, 0.18),
+    0 2px 14px rgba(247, 217, 138, 0.12);
+
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+/* Hide-on-scroll stays the same */
+.site-header.hide {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hide on scroll */
+.site-header.hide {
+  transform: translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  width: 65px;
+
+  /* Remove harsh edges */
+  border-radius: 12px;
+
+  /* Soft blend into nav bar */
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px;
+
+  /* Very soft gold glow */
+  box-shadow:
+    0 0 8px rgba(247, 217, 138, 0.25),
+    inset 0 0 4px rgba(0, 0, 0, 0.35);
+
+  opacity: 0.95;
+}
+
+
+.nav-links a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: #e8e4dd;
+  font-size: 1.1rem;
+  transition: 0.25s;
+}
+
+.nav-links a:hover {
+  color: #f7d98a;
+}
+
+/* Active nav (e.g. "Home" box) */
+.nav-links a.active {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 217, 138, 0.8);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================
+   HERO — MAIN INTRO
+============================================================ */
+
+/* ============================================================
+   PERFECTLY CENTERED HERO FOR ALL SCREEN SIZES
+============================================================ */
+
+/* DEBUG — FORCE HERO TEXT VISIBLE */
+.hero-title,
+.hero-subtitle,
+.hero-buttons {
+  opacity: 1 !important;
+  transform: none !important;
+}
+/* DEBUG — FORCE HERO IMAGE VISIBLE */
+.hero-right,
+.hero-frame,
+.hero-frame img {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  z-index: 10 !important;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 80px;
+
+  /* 🔥 Lower Cinematic Placement */
+  padding: 320px 10% 240px;
+
+  max-width: 1500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+
+/* Soft heroic glow behind the hero frame */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 125, 0.32) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  filter: blur(70px);
+  z-index: -1;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(80, 130, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  filter: blur(85px);
+  z-index: -1;
+}
+
+.hero-left {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 4.8rem;
+  line-height: 1.08;
+  font-weight: 600;
+  font-family: "Cinzel", serif;
+  margin-bottom: 20px;
+}
+
+/* Hybrid gold: solid but not overpowering */
+.hero-title span {
+  background: linear-gradient(90deg, #d6a449, #ffe8bb, #d6a449);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 0 2px rgba(215, 200, 161, 0.15),
+  0 0 6px rgba(215, 200, 161, 0.08);
+}
+
+.hero-subtitle {
+  font-size: 1.6rem;
+  color: #e6dfd5;
+  margin-bottom: 35px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+
+
+/* SHARED GOLD OUTLINE BUTTON STYLE (Hero Buttons) */
+.hero-buttons a,
+#playTheme {
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 1px solid #f7d98a;     /* GOLD OUTLINE */
+  background: transparent;        /* Clean IMAX glass */
+   color: #f7d98a;               /* Gold text */
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-decoration: none;          /* Remove underline from links */
+}
+
+#playTheme-gold:hover {
+  box-shadow:
+    0 0 12px rgba(209, 182, 128, 0.35);
+  transform: translateY(-2px);
+}
+
+
+
+
+
+
+/* Right hero frame */
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-frame {
+  background: rgba(10, 12, 22, 0.9);
+  padding: 14px;
+  border-radius: 26px;
+  backdrop-filter: blur(20px) saturate(160%);
+  width: 100%;
+  max-width: 520px;
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.7),
+    0 0 80px rgba(50, 90, 150, 0.25),
+    inset 0 0 40px rgba(255, 255, 255, 0.04);
+}
+
+.hero-frame img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  display: block;
+  object-fit: cover;
+}
+@media (max-width: 1100px) {
+  .hero {
+    padding: 260px 10% 200px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 200px 8% 160px;
+  }
+}
+@media (max-width: 700px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 50px;
+
+    padding: 160px 6% 120px;
+  }
+
+ .hero-buttons {
+    justify-content: center;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================================
+   ABOUT / ORIGIN STORY
+============================================================ */
+
+.about-section {
+   background: transparent !important;
+  backdrop-filter: none;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 160px 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  position: relative;
+  z-index: 10;
+}
+
+/* FORCE GOLD OUTLINE AROUND ORIGIN STORY CARD */
+.story-card.cinematic-card {
+  position: relative;
+  padding: 70px 80px;
+  border-radius: 26px;
+overflow: visible;
+  background: transparent !important;
+
+  /* Strong visible gold border */
+  border: 2px solid rgba(247, 217, 138, 0.65) !important;
+
+  /* Soft IMAX glow */
+  box-shadow:
+    0 0 20px rgba(247, 217, 138, 0.25),
+    0 0 40px rgba(247, 217, 138, 0.15);
+}
+
+
+
+.story-card-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  width: 100%;
+  align-items: flex-start;
+  position: relative;
+}
+
+.story-card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 68%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.story-card-main p {
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.story-card-title {
+  font-family: "Cinzel", serif;
+  font-size: 3.2rem;
+  margin-bottom: 25px;
+  color: #f7d98a;
+}
+
+.gold-accent {
+  color: #f7d98a;
+}
+
+.story-card-tagline {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #f7d98a;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Right column: stats + CTA */
+.story-card-side {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  padding-left: 60px;
+  padding-top: 10px;
+}
+
+.story-stat {
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 220, 150, 0.16);
+  border-radius: 14px;
+}
+
+.story-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ccc4ae;
+  margin-bottom: 6px;
+}
+
+.story-stat-value {
+  font-size: 1.4rem;
+  color: #f7d98a;
+  font-weight: 600;
+}
+
+/* CTA row on right */
+.story-cta-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 80px;
+  padding-right: 0;
+}
+
+.story-binder-cta {
+  padding: 14px 34px;
+  background: linear-gradient(90deg, #b8862b, #f5d18a, #b8862b);
+  border-radius: 50px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+  transition: 0.25s ease;
+  display: inline-block;
+
+  /* ✨ Breathing animation */
+  animation: journeyBreathe 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+
+.story-binder-cta:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.12);
+}
+
+/* ============================================================
+   MISSION • FOCUS • LOCATION POSTERS
+============================================================ */
+
+.mission-focus-section {
+  position: relative;
+  z-index: 50;
+  padding: 160px 10%;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(
+    circle at center,
+    rgba(10, 10, 18, 0.96) 0%,
+    rgba(5, 5, 12, 0.98) 40%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.poster-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.3fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* Base poster card */
+/* TRANSPARENT POSTER CARDS (Mission, Focus, Location) */
+.poster-card {
+  position: relative;
+  padding: 40px 34px 44px;
+  border-radius: 24px;
+
+  /* Transparent background */
+  background: transparent !important;
+
+  /* Remove heavy shadows so the card floats cleanly */
+  box-shadow: none !important;
+
+  color: #f8f4ee;
+  overflow: visible; /* allow glows to extend beyond border */
+}
+
+
+/* Outer frame */
+.poster-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+
+  /* Gold outer frame instead of blue */
+  border: 1px solid rgba(247, 217, 138, 0.35) !important;
+
+  box-shadow:
+    0 0 18px rgba(247, 217, 138, 0.22),
+    0 0 38px rgba(247, 217, 138, 0.12) !important;
+
+  pointer-events: none;
+}
+
+
+/* Inner gold frame */
+.poster-card::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 18px;
+
+  /* IMAX gold outline */
+  border: 1px solid rgba(247, 217, 138, 0.35) !important;
+
+  box-shadow:
+    0 0 14px rgba(247, 217, 138, 0.20),
+    inset 0 0 12px rgba(247, 217, 138, 0.15) !important;
+
+  pointer-events: none;
+}
+
+
+.poster-eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.23em;
+  text-transform: uppercase;
+  color: rgba(230, 220, 190, 0.85);
+  margin-bottom: 14px;
+}
+
+.poster-title {
+  font-family: "Cinzel", serif;
+  font-size: 2.3rem;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+
+.poster-title span {
+  color: #e9d6a3;
+  text-shadow:
+    0 0 15px rgba(255, 215, 125, 0.4),
+    0 0 32px rgba(255, 210, 110, 0.4);
+}
+
+.poster-body {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 34rem;
+  opacity: 0.92;
+}
+
+/* Focus list */
+.focus-list {
+  list-style: none;
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.focus-list li {
+  padding: 14px 16px 12px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+}
+
+.focus-list li h3 {
+  font-family: "Cinzel", serif;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #e9d6a3;
+  margin-bottom: 4px;
+}
+
+.focus-list li p {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* Location poster special background */
+/* LOCATION CARD — transparent + its own gold outline */
+.location-poster {
+  position: relative;
+  border-radius: 24px;
+
+  /* transparent so the stars show */
+  background: transparent;
+
+  /* GOLD OUTLINE directly on the card */
+  border: 1px solid rgba(233, 214, 163, 0.95);
+  box-shadow:
+    0 0 20px rgba(255, 215, 140, 0.45),
+    inset 0 0 18px rgba(255, 215, 140, 0.20);
+
+  overflow: hidden;
+}
+
+
+/* Mission arrow + energy */
+.mission-arrow-wrap {
+  position: relative;
+  width: 260px;
+  margin: 26px auto 0;
+}
+
+.mission-arrow {
+  width: 100%;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.45));
+  animation: arrowPulse 3.2s ease-in-out infinite;
+}
+
+.arrow-energy {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(255, 215, 0, 0) 0%,
+    rgba(255, 230, 120, 0.35) 40%,
+    rgba(255, 255, 255, 0.55) 60%,
+    rgba(255, 215, 0, 0) 100%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+  animation: arrowShimmer 4.8s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.25));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.65));
+  }
+}
+
+@keyframes arrowShimmer {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  20% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.65;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+}
+
+/* Spinning globe inside location card */
+.location-poster .cinematic-gold-globe-wrap {
+  margin: 24px auto;
+  width: 240px;
+  perspective: 800px;
+}
+
+.location-poster .cinematic-gold-globe {
+  width: 100%;
+  transform-style: preserve-3d;
+  animation: spinGlobe 18s linear infinite;
+  filter: drop-shadow(0 0 14px rgba(0, 110, 255, 0.25));
+}
+
+@keyframes spinGlobe {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+/* ============================================================
+   PROJECT SHOWCASE
+============================================================ */
+
+.project-showcase {
+  max-width: 1100px;
+  margin: 120px auto 80px auto;
+  padding: 0 20px;
+}
+
+.project-section-title {
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 2.6rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 50px;
+
+  
+
+
+}
+
+
+.project-panel {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 70px;
+  padding: 26px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 215, 0, 0.22);
+  box-shadow:
+    0 0 12px rgba(255, 215, 0, 0.25),
+    inset 0 0 8px rgba(255, 215, 0, 0.18);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  animation: projectReveal 1.3s ease forwards;
+}
+
+.project-image-wrap {
+  flex: 1;
+}
+
+.project-image {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.project-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-title {
+  font-family: "Cinzel", serif;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #ffe7a8;
+  text-shadow:
+    0 0 8px rgba(255, 215, 0, 0.35),
+    0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.project-desc {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.project-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.project-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  text-decoration: none;
+  color: #ffe7a8;
+  font-family: "Cinzel", serif;
+  font-size: 0.95rem;
+  transition: 0.3s ease;
+}
+
+.project-btn:hover {
+  box-shadow:
+    0 0 12px rgba(255, 215, 0, 0.45),
+    inset 0 0 6px rgba(255, 215, 0, 0.25);
+}
+
+.project-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ============================================================
+   VALUE CARDS (if you keep "Why I'm an Asset" section)
+============================================================ */
+
+.asset-section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 80px 20px 40px;
+}
+
+.asset-title {
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: #f2e9d0;
+  margin-bottom: 28px;
+  text-shadow:
+    0 0 6px rgba(255, 215, 0, 0.28),
+    0 2px 6px rgba(0, 0, 0, 0.7);
+  animation: titleFadeIn 1.4s ease forwards;
+  opacity: 0;
+}
+
+.value-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  max-width: 760px;
+  margin: 0 auto 40px auto;
+}
+
+.value-card {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  box-shadow:
+    0 0 10px rgba(255, 215, 0, 0.22),
+    inset 0 0 6px rgba(255, 215, 0, 0.18);
+  backdrop-filter: blur(4px);
+  text-align: center;
+  animation: assetFade 1.2s ease forwards;
+  opacity: 0;
+}
+
+.value-card h3 {
+  font-family: "Cinzel", serif;
+  color: #ffe7a8;
+  margin-bottom: 8px;
+  text-shadow:
+    0 0 8px rgba(255, 215, 0, 0.35),
+    0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.value-card p {
+  color: #ddd;
+  font-size: 1.05rem;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.55);
+}
+
+@keyframes assetFade {
+  0% { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* ============================================================
+   REVEAL ANIMATIONS (used by .reveal.in-view)
+============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes titleFadeIn {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes projectReveal {
+  0% { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1000px) {
+  .hero {
+    flex-direction: column;
+    padding-top: 200px;
+    padding-bottom: 160px;
+    text-align: center;
+  }
+
+  .hero-left,
+  .hero-right {
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .about-section {
+    padding: 140px 7% 140px;
+  }
+
+  .story-card.cinematic-card {
+    padding: 50px 32px;
+  }
+
+  .story-card-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .story-card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 78%;
+  width: 1px;
+
+  /* Cinematic gold fade */
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 217, 138, 0.05),
+    rgba(247, 217, 138, 0.45),
+    rgba(247, 217, 138, 0.05)
+  );
+
+  pointer-events: none; /* ← IMPORTANT so it doesn’t block clicks */
+}
+
+
+  .story-card-side {
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 24px;
+  }
+
+  .story-cta-row {
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .poster-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .location-poster {
+    grid-column: span 2;
+  }
+
+  .project-panel {
+    flex-direction: column;
+  }
+
+  .value-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-title {
+    font-size: 3.4rem;
+  }
+
+  .story-card.cinematic-card {
+    padding: 40px 22px;
+  }
+
+  .poster-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .location-poster {
+    grid-column: span 1;
+  }
+
+  .project-showcase {
+    padding: 0 14px;
+  }
+}
+/* =========================================
+   ELEGANT ANTIQUE GOLD SYSTEM
+   (Softer, deeper gold for titles & frames)
+========================================= */
+
+:root {
+  --gold-main: #d1b680;        /* softer antique gold */
+  --gold-light: #e8d7a8;       /* light highlight */
+  --gold-dark: #8c7348;        /* shadow gold */
+  --gold-glow: rgba(209, 182, 128, 0.25); /* VERY soft glow */
+}
+
+/* TITLES */
+h1, h2, h3, .section-title, .hero-title {
+  color: var(--gold-main);
+  text-shadow:
+    0 0 6px rgba(209, 182, 128, 0.20),
+    0 0 12px rgba(209, 182, 128, 0.10);
+}
+
+/* SMALL HEADERS (MY STORY, MISSION, LOCATION, ETC) */
+.section-header {
+  color: var(--gold-light);
+  text-shadow:
+    0 0 4px rgba(209, 182, 128, 0.15);
+}
+
+/* CARD FRAMES */
+.card,
+.mission-card,
+.focus-card,
+.location-card,
+.origin-card {
+  border: 1px solid rgba(209, 182, 128, 0.22);
+  box-shadow:
+    0 0 8px rgba(209, 182, 128, 0.18),
+    inset 0 0 10px rgba(0,0,0,0.45);
+}
+
+/* GOLD BUTTONS */
+.btn-gold {
+  background: linear-gradient(
+    to bottom,
+    var(--gold-main),
+    var(--gold-dark)
+  );
+  color: #000;
+  box-shadow:
+    0 0 6px rgba(209, 182, 128, 0.25);
+}
+
+.btn-gold:hover {
+  box-shadow:
+    0 0 12px rgba(209, 182, 128, 0.35);
+  transform: translateY(-2px);
+}
+
+/* POSTER / FEATURED PROJECT GLOW */
+.feature-frame {
+  box-shadow:
+    0 0 10px rgba(209, 182, 128, 0.18),
+    0 0 20px rgba(209, 182, 128, 0.12);
+}
+
+
+
+
+
+
+
+/* ============================================================
+   CLEAN IMAX NIGHT + SOFTER GOLD PATCH
+   (Override only visuals, keep layout)
+============================================================ */
+
+/* Unify gold palette (final say) */
+:root {
+  --gold-main: #d1c9a4;   /* soft champagne gold */
+  --gold-light: #f2e9c8;  /* highlight */
+  --gold-dark: #75674b;   /* shadow */
+}
+
+/* Slightly cooler, darker space gradient (no warm tint) */
+html::before {
+  background: radial-gradient(
+    circle at center,
+    rgba(10, 16, 32, 0.26) 0%,
+    rgba(3, 6, 16, 0.7) 45%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+/* Global title glow toned way down */
+h1,
+h2,
+h3,
+.section-title,
+.hero-title {
+  color: var(--gold-main);
+  text-shadow:
+    0 0 2px rgba(209, 201, 164, 0.35),
+    0 0 4px rgba(209, 201, 164, 0.15);
+}
+
+/* Hero name – elegant, not screaming */
+.hero-title span {
+  background: linear-gradient(
+    90deg,
+    var(--gold-main),
+    var(--gold-light),
+    var(--gold-main)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 0 2px rgba(209, 201, 164, 0.4),
+    0 0 5px rgba(209, 201, 164, 0.2);
+}
+
+/* Poster title span glow softened */
+.poster-title span {
+  color: var(--gold-light);
+  text-shadow:
+    0 0 4px rgba(255, 215, 125, 0.30);
+}
+
+/* Inner gold frame – less intense */
+.poster-card::after {
+  border-color: rgba(233, 214, 163, 0.6);
+  box-shadow:
+    0 0 12px rgba(255, 215, 140, 0.28),
+    inset 0 0 16px rgba(255, 215, 140, 0.10);
+}
+
+/* Panels (story / project / value) – less gold, more neutral IMAX */
+.story-card.cinematic-card,
+.project-panel,
+.value-card {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 0 10px rgba(0, 0, 0, 0.8),
+    0 0 18px rgba(15, 25, 55, 0.4);
+}
+
+/* Section titles (Projects, Asset, etc.) – precise, not foggy */
+.project-section-title,
+.asset-title {
+  color: #dfc21f; /* premium champagne gold */
+  text-shadow:
+    0 0 10px rgba(255, 210, 120, 0.45),
+    0 0 25px rgba(255, 200, 110, 0.30),
+    0 2px 8px rgba(0, 0, 0, 0.85) !important;
+
+
+}
+
+/* Mission/Focus/Location background – colder, more night-sky */
+.mission-focus-section {
+  background: radial-gradient(
+    circle at center,
+    rgba(6, 10, 22, 0.96) 0%,
+    rgba(2, 4, 10, 0.98) 45%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+/* "View My Story" button */
+/* FINAL OVERRIDE — Journey Button */
+/* FINAL — Story Button (NO BREATHING) */
+.btn-story {
+ padding: 12px 26px;
+  border-radius: 999px;
+  border: 1px solid #f7d98a;     /* GOLD OUTLINE */
+  background: transparent;        /* Clean IMAX glass */
+  color: #f7d98a;                 /* Gold text */
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-decoration: none;          /* Remove underline from links */
+}
+
+
+.btn-story:hover {
+  background: rgba(247, 217, 138, 0.12);
+  transform: translateY(-3px);
+  color: #fff3d2;
+  box-shadow: 0 0 18px rgba(247, 217, 138, 0.45);
+}
+
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(247, 217, 138, 0.35),
+                0 0 20px rgba(247, 217, 138, 0.20);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 18px rgba(247, 217, 138, 0.55),
+                0 0 35px rgba(247, 217, 138, 0.35);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(247, 217, 138, 0.35),
+                0 0 20px rgba(247, 217, 138, 0.20);
+  }
+}
+@keyframes journeyBreathe {
+  0% {
+    transform: scale(1);
+    box-shadow:
+      0 0 8px rgba(245, 209, 138, 0.25),
+      0 0 18px rgba(245, 209, 138, 0.15);
+  }
+
+  50% {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 16px rgba(245, 209, 138, 0.45),
+      0 0 32px rgba(245, 209, 138, 0.30);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 8px rgba(245, 209, 138, 0.25),
+      0 0 18px rgba(245, 209, 138, 0.15);
+  }
+}
+.about-section .story-card-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 68%;
+  width: 2px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 217, 138, 0) 0%,
+    rgba(247, 217, 138, 0.85) 50%,
+    rgba(247, 217, 138, 0) 100%
+  );
+
+  pointer-events: none;
+  z-index: 50;
+}
+/* 🔥 FINAL OVERRIDE — Make Mission / Focus / Location cards fully transparent */
+.poster-card {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Remove the dark gradient behind the entire mission/focus/location section */
+.mission-focus-section {
+  background: transparent !important;
+}
+
+/* Remove inner and outer card glow backgrounds */
+.poster-card::before,
+.poster-card::after {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+/* ============================================================
+   FINAL TRANSPARENCY FIX — Mission / Focus / Location Cards
+============================================================ */
+
+/* Remove ALL darkness from poster cards */
+.poster-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Remove inner + outer frames that tint dark */
+.poster-card::before,
+.poster-card::after {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  opacity: 0 !important;
+}
+
+/* Remove dark radial gradient of the whole section */
+.mission-focus-section {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Remove internal card gradients */
+.poster-card * {
+  background: transparent !important;
+}
+/* ------------------------------------------------------------
+   RESTORE GOLD OUTLINE FOR LOCATION CARD ONLY
+------------------------------------------------------------ */
+.location-poster {
+  position: relative;
+}
+
+.location-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  border: 1px solid rgba(233, 214, 163, 0.85);  /* gold frame */
+  box-shadow:
+    0 0 18px rgba(255, 215, 140, 0.4),
+    inset 0 0 22px rgba(255, 215, 140, 0.16);
+  pointer-events: none;
+}
+/* ------------------------------------------------------------
+   FORCE RESTORE GOLD OUTLINE FOR LOCATION CARD ONLY
+------------------------------------------------------------ */
+
+.location-poster {
+justify-content: center;
+  padding-right: 180px; /* gives text room */
+  overflow: visible;    /* stops clipping */
+  position: relative !important;
+  z-index: 10 !important;
+  
+}
+.location-poster .poster-body,
+.location-poster .poster-title {
+  position: relative;
+  z-index: 5;
+}
+.location-poster .poster-body {
+  display: block; 
+   line-height: 2; /* gives letters breathing room */
+    padding-left: 16px;
+ 
+}
+
+
+
+/* Force the border pseudo-layer to override transparency rules */
+.location-poster::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 24px !important;
+
+  /* GOLD OUTLINE (strong override) */
+  border: 1px solid rgba(233, 214, 163, 0.95) !important;
+
+  box-shadow:
+    0 0 22px rgba(255, 215, 140, 0.5) !important,
+    inset 0 0 26px rgba(255, 215, 140, 0.22) !important;
+
+  pointer-events: none !important;
+  z-index: 12 !important;
+}
+/* ============================================================
+   ALL POSTER CARDS — PREMIUM GOLD OUTLINE + TRANSPARENT BACKGROUND
+============================================================ */
+
+.poster-card {
+  position: relative !important;
+  border-radius: 24px !important;
+  background: transparent !important;
+   overflow: hidden;
+  padding-right: 65px;
+
+  /* IMAX gold outline */
+  border: 1px solid rgba(247, 217, 138, 0.85) !important;
+
+  /* Soft outer + inner glow */
+  box-shadow:
+    0 0 22px rgba(247, 217, 138, 0.35) !important,
+    inset 0 0 16px rgba(247, 217, 138, 0.18) !important;
+}
+.location-poster {
+  overflow: visible;
+  padding-bottom: 24px; /* small safety buffer */
+}
+/* Remove old glowing pseudo-frames so only the new gold remains */
+.poster-card::before,
+.poster-card::after {
+  all: unset !important;
+}
+
+/* ========================================
+   FINAL OVERRIDES — FEATURED PROJECTS
+   (Guaranteed to apply)
+========================================= */
+
+/* Premium gold title */
+.project-section-title {
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 2.6rem;
+  letter-spacing: 1.4px;
+  margin-bottom: 50px;
+
+  
+
+}
+
+/* Transparent IMAX glass cards */
+.project-panel {
+  background: rgba(10, 12, 22, 0.35) !important;
+  border: 1px solid rgba(247, 217, 138, 0.22) !important;
+
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+
+  box-shadow:
+    0 0 16px rgba(0, 0, 0, 0.75),
+    0 0 26px rgba(50, 85, 140, 0.25) !important;
+
+  position: relative; /* required for inner frame */
+}
+
+/* Soft gold inner frame (IMAX poster style) */
+.project-panel::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 14px;
+  pointer-events: none;
+
+  border: 1px solid rgba(233, 214, 163, 0.45);
+  box-shadow:
+    0 0 12px rgba(255, 215, 140, 0.25),
+    inset 0 0 14px rgba(255, 215, 140, 0.10);
+}
+/
+
+/* ============================================================
+   FINAL GLOBAL TITLE OVERRIDES — ALWAYS WIN
+============================================================ */
+
+/* Force override for HERO TITLE */
+.hero-title {
+  color: #e8d28b !important;
+  text-shadow:
+    0 0 10px rgba(255, 220, 140, 0.45),
+    0 0 24px rgba(255, 215, 125, 0.25),
+    0 3px 8px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Force override for FEATURED PROJECTS TITLE */
+/* HERO TITLE OVERRIDE */
+.hero-title,
+.hero-title span {
+  color: #e8d28b !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+
+  text-shadow:
+    0 0 12px rgba(255, 220, 140, 0.50),
+    0 0 28px rgba(255, 215, 125, 0.30),
+    0 3px 8px rgba(0, 0, 0, 0.85) !important;
+}
+
+
+/* FINAL — UNBEATABLE GRADIENT FOR FEATURED PROJECTS */
+section.project-showcase h2.project-section-title {
+  background: linear-gradient(90deg, #ffd886, #fff4ce, #ffd886) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+  text-shadow:
+    0 0 12px rgba(255, 220, 140, 0.55) !important,
+    0 0 28px rgba(255, 215, 125, 0.35) !important,
+    0 3px 10px rgba(0, 0, 0, 0.85) !important;
+  font-size: 3rem !important;
+}
+/* REMOVE BLUE FRAME + BLUE GLOW FROM FEATURED PROJECTS CARDS */
+section.project-showcase .project-panel::before {
+  opacity: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+section.project-showcase {
+  background: transparent !important;
+  isolation: isolate !important; /* stops blend modes from above bleeding in */
+}
+section.project-showcase h2.project-section-title {
+  filter: drop-shadow(0 0 22px rgba(255, 215, 125, 0.35)) !important;
+}
+/* FULL ISOLATION OF FEATURED PROJECTS SECTION */
+section.project-showcase {
+  position: relative;
+  isolation: isolate !important;
+  z-index: 5;
+  background: transparent !important;
+}
+section.project-showcase h2.project-section-title {
+  background: linear-gradient(90deg, #ffdf8b, #fff8d8, #ffdf8b) !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+
+  /* SUPER-GOLD BLOOM */
+  text-shadow:
+    0 0 22px rgba(255, 230, 150, 0.85) !important,
+    0 0 55px rgba(255, 215, 125, 0.55) !important,
+    0 4px 14px rgba(0, 0, 0, 1) !important;
+}
+section.project-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0) !important; /* removes dark haze */
+  pointer-events: none;
+}
+/* WARM BACKDROP BEHIND FEATURED PROJECTS TITLE */
+section.project-showcase::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 210, 120, 0.18) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  filter: blur(25px);
+  z-index: -1;
+}
+section.project-showcase h2.project-section-title {
+  filter: saturate(1.35) brightness(1.15);
+}
+/* COLOR CORRECTION WINDOW FOR FEATURED PROJECTS HEADER */
+section.project-showcase::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 260px;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 215, 140, 0.35) 0%,
+    rgba(255, 215, 140, 0.18) 25%,
+    rgba(0, 0, 0, 0) 70%
+  );
+
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(28px);
+}
+section.project-showcase h2.project-section-title {
+  filter: saturate(1.45) brightness(1.3) !important;
+}
+
+/* ============================================================
+   STARFIELD HARD FIX — FORCE VISIBILITY
+============================================================ */
+
+/* ============================================================
+   STARFIELD HARD FIX — FORCE VISIBILITY
+============================================================ */
+
+#background-layers {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+}
+
+#starCanvas {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+}
+
+
+/* HARD ISOLATION TEST — FORCE CONTENT ABOVE EVERYTHING */
+body > * {
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,207 @@
+/* =====================================================
+   RESET
+===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0b0e16;
+  color: #f4f1ea;
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+.site-header {
+  padding: 24px 40px;
+}
+
+.site-header a {
+  color: #d6c6a3;
+  text-decoration: none;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.08em;
+}
+
+/* =====================================================
+   BINDER WRAPPER
+===================================================== */
+.binder {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+/* =====================================================
+   BOOK + GRID
+===================================================== */
+.binder-book {
+  position: relative;
+}
+
+.binder-pages {
+  display: grid;
+  grid-template-columns: 1fr 90px 1fr;
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  row-gap: 120px;
+  position: relative;
+}
+.binder {
+  scroll-snap-type: y mandatory;
+}
+
+.binder-section {
+  scroll-snap-align: start;
+}
+
+
+/* =====================================================
+   PAGES
+===================================================== */
+.binder-section {
+  background: linear-gradient(
+    180deg,
+    rgba(26, 30, 46, 0.96),
+    rgba(16, 18, 30, 0.96)
+  );
+  padding: 48px 56px;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 215, 160, 0.05),
+    0 30px 60px rgba(0, 0, 0, 0.6);
+}
+.binder-section {
+  min-height: 480px;
+}
+
+/* left pages */
+#origin,
+#discipline {
+  grid-column: 1;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* right pages */
+#training,
+#next-objective {
+  grid-column: 3;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+/* =====================================================
+   BINDER SPINE + RINGS (LOCKED)
+===================================================== */
+/* =====================================================
+   BINDER SPINE + RINGS (FULL HEIGHT)
+===================================================== */
+.binder-pages::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.7)
+  );
+  border-radius: 14px;
+  z-index: 1;
+}
+
+.binder-pages::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(210, 210, 210, 0.75) 60%,
+      transparent 62%
+    )
+    center / 42px 42px repeat-y;
+  background-position: center 80px;
+  z-index: 2;
+}
+
+
+/* =====================================================
+   TYPOGRAPHY
+===================================================== */
+.binder-title {
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.12em;
+  margin-bottom: 24px;
+  font-size: 1.4rem;
+  color: #e6dcc6;
+}
+
+.binder-article {
+  margin-top: 32px;
+}
+
+.binder-article h3 {
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #d9cba8;
+}
+
+.binder-article p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.binder-section h3 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.08em;
+  color: #d9cba8;
+}
+
+.binder-section ul {
+  margin: 12px 0 20px 20px;
+}
+
+.binder-section li {
+  margin-bottom: 8px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+@media (max-width: 900px) {
+  .binder-pages {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .binder-pages::before,
+  .binder-pages::after {
+    display: none;
+  }
+
+  #origin,
+  #training,
+  #discipline,
+  #next-objective {
+    grid-column: auto;
+    border-radius: 18px;
+  }
+}

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Binder | Trainmon Harrison</title>
+
+  <link rel="stylesheet" href="binder.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <a href="index.html">← Back</a>
+    </div>
+  </div>
+</header>
+
+<main class="binder">
+
+  <!-- =========================
+       BOOK CONTAINER (NEW)
+  ========================== -->
+  <div class="binder-book">
+    <div class="binder-pages">
+
+      <!-- =========================
+           ORIGIN
+      ========================== -->
+      <section class="binder-section" id="origin">
+        <h2 class="binder-title">Origin</h2>
+
+        <p>
+          There was a point where I stopped trying to avoid complexity and started leaning
+          into it. Instead of stepping back from confusion, I learned how to step into it
+          with structure, patience, and intention.
+        </p>
+
+        <p>
+          Debugging code taught me how to stay calm under pressure, break problems into
+          manageable parts, and keep moving forward even when progress was slow.
+          That discipline carried over into everything I do.
+        </p>
+
+        <p>
+          Today, I approach challenges the same way I approach development: identify the
+          issue, understand the system, and solve it one step at a time.
+        </p>
+
+        <p><em>I don’t run from difficult problems anymore. I work through them.</em></p>
+      </section>
+
+      <!-- =========================
+           TRAINING
+      ========================== -->
+      <section class="binder-section" id="training">
+        <h2 class="binder-title">Training</h2>
+
+        <article class="binder-article">
+          <h3>Starfield & Background System Debugging</h3>
+
+          <p><strong>Problem</strong></p>
+          <p>
+            The starfield background system stopped working correctly. Stars disappeared,
+            content became invisible, and small changes caused major visual breakage across
+            the page.
+          </p>
+
+          <p><strong>What I Was Seeing</strong></p>
+          <p>
+            Stars rendered inconsistently, page content was hidden behind background layers,
+            and z-index changes fixed one issue while breaking another.
+          </p>
+
+          <p><strong>What Was Actually Happening</strong></p>
+          <p>
+            The issue was not a single bug but a system conflict. Background layers competed
+            for the same stacking context, and unrelated JavaScript interfered.
+          </p>
+
+          <p><strong>How I Fixed It</strong></p>
+          <p>
+            I rebuilt the system intentionally by isolating the starfield, removing unrelated
+            scripts, and reestablishing a clear layer order.
+          </p>
+
+          <p><strong>Result</strong></p>
+          <p>
+            The starfield rendered consistently, content remained readable, and the page
+            became stable and predictable.
+          </p>
+        </article>
+
+        <article class="binder-article">
+          <h3>JavaScript Conflict — Arena JS vs Page JS</h3>
+
+          <p><strong>Problem</strong></p>
+          <p>
+            Page behavior became unpredictable. Animations triggered unexpectedly and
+            features stopped working.
+          </p>
+
+          <p><strong>What Was Actually Happening</strong></p>
+          <p>
+            JavaScript from a different page was running globally without required DOM
+            elements.
+          </p>
+
+          <p><strong>How I Fixed It</strong></p>
+          <p>
+            I separated concerns and ensured scripts only ran where intended.
+          </p>
+
+          <p><strong>Result</strong></p>
+          <p>
+            Pages stopped interfering with each other and behavior became predictable.
+          </p>
+        </article>
+
+        <article class="binder-article">
+          <h3>Poster Card Layout, Overflow & Clipping Fixes</h3>
+
+          <p><strong>Problem</strong></p>
+          <p>
+            Poster content was clipped or cut off across screen sizes.
+          </p>
+
+          <p><strong>What Was Actually Happening</strong></p>
+          <p>
+            Overflow and container constraints restricted usable space.
+          </p>
+
+          <p><strong>How I Fixed It</strong></p>
+          <p>
+            I adjusted overflow behavior and padding to respect visual boundaries.
+          </p>
+
+          <p><strong>Result</strong></p>
+          <p>
+            Layouts stabilized and cards became intentional.
+          </p>
+        </article>
+      </section>
+
+      <!-- =========================
+           DISCIPLINE
+      ========================== -->
+     <section class="binder-section" id="discipline">
+  <h2 class="binder-title">Discipline</h2>
+
+  <p><strong>How I Work When Things Don’t Go Smoothly</strong></p>
+  <p>
+    I didn’t build my skills in ideal conditions. I learned while balancing full-time work,
+    limited time, and real-world responsibilities. Because of that, discipline for me isn’t
+    about motivation — it’s about consistent behavior under friction.
+  </p>
+<h3 class="binder-subtitle">What This Looks Like in Practice</h3>
+
+  <p>
+    When development gets uncomfortable or unclear, I default to structure instead of
+    avoidance:
+  </p>
+  <ul>
+    <li>I break problems down rather than stepping away from them</li>
+    <li>I keep working even when progress is slow or non-linear</li>
+    <li>I debug methodically instead of rushing fixes</li>
+    <li>I continue building without needing external pressure</li>
+  </ul>
+  <p>
+    I don’t wait for perfect momentum. I work with the conditions I have.
+  </p>
+
+  <p><strong>How This Shows Up in My Development Work</strong></p>
+  <p>Discipline is what allows me to:</p>
+  <ul>
+    <li>Stay engaged when systems break or behave unexpectedly</li>
+    <li>Isolate issues instead of abandoning projects</li>
+    <li>Make steady progress through uncertainty</li>
+    <li>Finish what I start, even when solutions aren’t obvious</li>
+  </ul>
+  <p>
+    This is the same approach I bring to code, debugging, and learning new systems.
+  </p>
+
+  <p><strong>Why This Matters on a Team</strong></p>
+  <p>
+    Software development isn’t just about knowing syntax — it’s about reliability when
+    things fail. The habits I’ve built translate directly into a team environment:
+  </p>
+  <ul>
+    <li>Consistent follow-through</li>
+    <li>Comfort working within structure and constraints</li>
+    <li>Accountability for outcomes, not excuses</li>
+    <li>Openness to feedback and iteration</li>
+  </ul>
+  <p>
+    I don’t disappear when problems surface. I stay present, work through them, and move
+    projects forward.
+  </p>
+</section>
+
+
+      <!-- =========================
+           NEXT OBJECTIVE
+      ========================== -->
+      <section class="binder-section" id="next-objective">
+  <h2 class="binder-title">Career Direction</h2>
+
+  <p>
+    I am seeking an entry-level software developer role where I can contribute
+    immediately while continuing to grow as an engineer.
+  </p>
+
+  <p>
+    I’m looking to join a team that values:
+  </p>
+  <ul>
+    <li>Clear communication</li>
+    <li>Thoughtful problem-solving</li>
+    <li>Maintainable, well-structured code</li>
+  </ul>
+
+  <p>
+    I’m not looking for perfection — I’m looking for an environment where learning
+    and improvement are expected.
+  </p>
+
+  <p><strong>What I Bring</strong></p>
+  <p>
+    I bring a mindset built around:
+  </p>
+  <ul>
+    <li>Diagnosing problems instead of avoiding them</li>
+    <li>Staying calm when systems break</li>
+    <li>Finishing what I start</li>
+    <li>Learning quickly through real-world challenges</li>
+  </ul>
+
+  <p>
+    I approach development with patience, curiosity, and accountability — the same
+    way I’ve approached building my skills so far.
+  </p>
+
+  <p><strong>How I Plan to Grow</strong></p>
+  <p>
+    In a junior role, my focus is to:
+  </p>
+  <ul>
+    <li>Learn established codebases</li>
+    <li>Improve through code reviews and feedback</li>
+    <li>Strengthen backend and frontend fundamentals</li>
+    <li>Contribute reliable, thoughtful work over time</li>
+  </ul>
+
+  <p>
+    I take coaching seriously and value clarity over ego.
+  </p>
+
+  <p><strong>Why I’m Ready</strong></p>
+  <p>
+    I’m ready because I’ve already built the habits required to succeed:
+  </p>
+  <ul>
+    <li>Consistency over shortcuts</li>
+    <li>Process over panic</li>
+    <li>Growth over comfort</li>
+  </ul>
+
+  <p>
+    I don’t expect an easy path — I’m prepared for a real one.
+  </p>
+</section>
+
+
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

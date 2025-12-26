@@ -1,0 +1,437 @@
+/***********************************
+ Arena + Binder CSS (LOCKED)
+************************************/
+/* =========================================
+   CROWD HEADS — SINGLE SOURCE OF TRUTH
+========================================= */
+
+.crowd-heads {
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  bottom: 48%;
+  height: 20%;
+
+  z-index: 9;
+  pointer-events: none;
+  overflow: hidden;
+
+  animation: crowdSwell 8s ease-in-out infinite;
+}
+
+
+
+
+
+
+
+
+/* =========================================
+   BASE
+========================================= */
+
+.arena-body {
+  margin: 0;
+  min-height: 100vh;
+  background: #02030a;
+  color: #f8f4ee;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.arena-scene {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* =========================================
+   BACKDROP
+========================================= */
+
+.arena-backdrop {
+  position: absolute;
+  inset: 0;
+  background: #0a0d1c;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+/* =========================================
+   Z-LAYER ORDER (LOCKED)
+========================================= */
+
+.arena-backdrop  { z-index: 0; }
+.arena-crowd     { z-index: 5; }
+.crowd-heads     { z-index: 8; }
+.crowd-front     { z-index: 9; }
+.arena-backlight { z-index: 12; }
+.arena-lights    { z-index: 14; }
+.ring            { z-index: 20; }
+
+/* =========================================
+   CROWD PIT (DARK MASS)
+========================================= */
+
+.arena-crowd {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 42%;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.95)
+  );
+}
+
+/* =========================================
+   CROWD HEADS — SINGLE SOURCE
+========================================= */
+
+
+/* =========================================
+   INDIVIDUAL HEAD SILHOUETTES
+========================================= */
+
+.crowd-head {
+  position: absolute;
+  width: 42px;
+  height: 56px;
+
+  background:
+    radial-gradient(circle at 50% 28%, rgba(0,0,0,0.95) 0 14px, transparent 15px),
+    radial-gradient(ellipse at 30% 80%, rgba(0,0,0,0.95) 0 18px, transparent 19px),
+    radial-gradient(ellipse at 70% 80%, rgba(0,0,0,0.95) 0 18px, transparent 19px),
+    linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95));
+
+  border-radius: 18px;
+  opacity: 0.85;
+
+  transform: translateX(0) scale(var(--s, 1));
+  animation: crowdFloat var(--dur, 6s) ease-in-out infinite;
+
+  filter:
+    drop-shadow(0 -1px 4px rgba(255,200,120,0.12))
+    drop-shadow(0 0 6px rgba(0,120,255,0.12));
+}
+
+@keyframes crowdFloat {
+  0%   { transform: translateX(0) scale(var(--s)); }
+  50%  { transform: translateX(6px) scale(var(--s)); }
+  100% { transform: translateX(0) scale(var(--s)); }
+}
+@keyframes crowdSwell {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* =========================================
+   FRONT CROWD SILHOUETTE
+========================================= */
+
+.crowd-front {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 48%;
+  height: 18%;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.95),
+    rgba(0,0,0,0.75),
+    transparent
+  );
+
+  box-shadow: inset 0 12px 30px rgba(0,0,0,0.8);
+}
+
+/* =========================================
+   BACKLIGHT (RIM SEPARATION)
+========================================= */
+
+.arena-backlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 48%;
+  height: 18%;
+  background: linear-gradient(
+    to top,
+    rgba(60,90,180,0.75),
+    rgba(40,60,120,0.55),
+    transparent
+  );
+}
+
+/* =========================================
+   LIGHT RIG
+========================================= */
+
+.arena-lights {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 60%;
+  height: 25%;
+  transform: translateX(-50%);
+  background: rgba(255,215,130,0.04);
+}
+
+
+
+
+
+
+
+/* =========================================================
+   RING + MAT + ROPES + PODIUM (LOCKED — SINGLE SOURCE)
+   Matches your HTML exactly:
+   <section class="ring">
+     <div class="ring-floor-top"></div>
+     <div class="ring-floor"></div>
+     <div class="ring-ropes ring-ropes--back"></div>
+     <div class="ring-podium">...</div>
+     <div class="ring-ropes ring-ropes--front"></div>
+   </section>
+========================================================= */
+
+/* =========================
+   RING (STAGE)
+========================= */
+.ring{
+  position: relative;
+  width: min(900px, 100%);
+  height: min(500px, 70vh);
+
+  /* DO NOT use flex centering here (it fights absolute children) */
+  display: block;
+
+  /* Single source of truth */
+  --mat-top: 26%;
+  --mat-x: 4%;
+  --mat-bottom: 6%;
+
+  z-index: 20;
+}
+
+
+
+   RING SYSTEM — FINAL, LOCKED, DROP-IN
+========================================================= */
+
+/* =========================================
+   RING — FINAL SHIPPABLE VERSION
+   (NO MAT, NO PODIUM)
+========================================= */
+
+/* =========================
+   RING — FINAL, STABLE
+========================= */
+.ring {
+  position: relative;
+  width: min(900px, 100%);
+  height: min(500px, 70vh);
+  z-index: 20;
+}
+
+/* =========================
+   ROPES — EASY TO ADJUST
+========================= */
+.ring-ropes {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  height: 8px;
+  display: flex;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.ring-ropes::before,
+.ring-ropes::after {
+  content: "";
+  flex: 1;
+  border-radius: 40px;
+}
+
+.ring-ropes::before {
+  background: #0d66ff;
+  box-shadow: 0 0 20px rgba(13,102,255,0.4);
+}
+
+.ring-ropes::after {
+  background: #ffbe6a;
+  box-shadow: 0 0 22px rgba(255,190,106,0.55);
+}
+
+/* 🔧 MOVE THESE TWO VALUES ONLY */
+.ring-ropes--back {
+  top: 18%;   /* ← move UP by lowering number */
+  z-index: 2;
+}
+
+.ring-ropes--front {
+  top: 58%;   /* ← move DOWN by increasing number */
+  z-index: 5;
+}
+
+/* =========================
+   BINDER — HERO OBJECT (LOCKED)
+========================= */
+
+/* =========================
+   BINDER — HERO OBJECT (FINAL)
+========================= */
+
+.ring-binder {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+
+  /* cinematic spotlight */
+  filter:
+    drop-shadow(0 0 40px rgba(255,190,106,0.45))
+    drop-shadow(0 0 90px rgba(60,120,255,0.25));
+
+  animation: binderIdle 6s ease-in-out infinite;
+}
+
+/* MAIN BINDER BODY */
+.ring-binder .binder {
+  position: relative;
+  width: 190px;
+  height: 130px;
+
+  background: linear-gradient(
+    135deg,
+    #0c1328,
+    #101526 55%,
+    #0a1022
+  );
+
+  border-radius: 14px;
+  outline: 1px solid rgba(255,190,106,0.7);
+
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.85),
+    inset 0 0 0 1px rgba(255,190,106,0.35);
+
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* SPINE (LEFT EDGE) */
+.ring-binder .binder::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 100%;
+
+  background: linear-gradient(
+    to right,
+    #070b18,
+    #141c3a
+  );
+
+  box-shadow: inset -1px 0 0 rgba(255,190,106,0.35);
+}
+
+/* PAGE STACK (RIGHT EDGE) */
+/* BINDER SPINE */
+.ring-binder .binder::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  width: 6px;
+  height: calc(100% - 20px);
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(220,220,220,0.9) 0 6px,
+      rgba(220,220,220,0.15) 6px 14px
+    );
+
+  border-radius: 4px;
+  opacity: 0.85;
+}
+
+
+/* TITLE TEXT */
+/* TITLE */
+.ring-binder .binder h1 {
+  position: absolute;
+  top: 22px;
+  left: 52%;
+
+  transform: translateX(-50%);
+
+  font-family: "Cinzel", serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  color: #f3d28a;
+  white-space: nowrap;
+}
+
+
+/* SUBTEXT */
+.ring-binder .binder p {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+
+  transform: translateX(-50%);
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 14px;
+  text-align: center;
+
+  color: rgba(240,240,240,0.85);
+  width: 80%;
+}
+
+
+/* HOVER — POWER MOMENT */
+.ring-binder .binder:hover {
+  transform: scale(1.07);
+  box-shadow:
+    0 45px 90px rgba(0,0,0,0.95),
+    0 0 70px rgba(255,190,106,0.8);
+}
+
+/* IDLE MOTION — ALIVE */
+@keyframes binderIdle {
+  0%   { transform: translate(-50%, -50%) translateY(0); }
+  50%  { transform: translate(-50%, -50%) translateY(-6px); }
+  100% { transform: translate(-50%, -50%) translateY(0); }
+}
+
+
+.crowd-head {
+  opacity: 0.9;
+  filter:
+    drop-shadow(0 -2px 8px rgba(255,190,90,0.35))
+    drop-shadow(0 0 12px rgba(60,120,255,0.4));
+}
+
+
+

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainmon Harrison | Portfolio</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cormorant+Garamond:wght@300;400;500;600&family=Anton&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       BACKGROUND STACK (STARS + IMAX LIGHTING)
+  ============================================================ -->
+  <div id="background-layers">
+    <canvas id="starCanvas"></canvas>
+    <div class="imax-top-glow"></div>
+    <div class="blue-overlay"></div>
+    <div class="gold-overlay"></div>
+    <div id="grainTexture"></div>
+  </div>
+
+  <!-- TOP CINEMATIC OVERLAYS -->
+  <div class="cinematic-overlays">
+    <div class="film-grain-blue"></div>
+    <div class="film-grain-warm"></div>
+    <div class="grain-overlay"></div>
+<div class="poster-graphic"></div>
+
+    <div class="dark-cinematic-filter"></div>
+    <div class="vignette"></div>
+  </div>
+
+  <!-- ============================================================
+       HEADER / NAV
+  ============================================================ -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" />
+      </div>
+
+      <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#about">My Story</a>
+        <a href="#mission">Mission</a>
+        
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+ <section id="hero" class="hero">
+
+  <div class="hero-left">
+    <h1 class="hero-title reveal">
+      I’M <span>TRAINMON HARRISON</span>
+    </h1>
+
+    <p class="hero-subtitle reveal">
+      Turning setbacks into software.
+    </p>
+
+    <div class="hero-buttons reveal">
+      <button id="playTheme">🎵 Play Theme</button>
+      <audio id="themeAudio" preload="none">
+  <source src="media/NEFFEX-Conviction.wav" type="audio/wav">
+</audio>
+
+      <a href="#about" class="btn-story">Watch the Journey →</a>
+    </div>
+  </div>
+
+  <div class="hero-right ">
+    <div class="hero-frame">
+      <img src="images/Trainmon-hero1.jpg" alt="Trainmon Harrison" />
+    </div>
+  </div>
+
+</section>
+
+
+  <!-- ============================================================
+       ORIGIN STORY (ABOUT)
+  ============================================================ -->
+  <section id="about" class="about-section ">
+
+    <div class="story-card cinematic-card">
+      <div class="story-card-inner">
+
+        <!-- LEFT: STORY COPY -->
+        <div class="story-card-main">
+          <h2 class="story-card-title">
+            <span class="gold-accent">MY</span> ORIGIN STORY
+          </h2>
+
+          <p class="story-card-intro">
+            I’m <span>Trainmon Harrison</span>, a LAMP–stack developer who refused to tap out.
+          </p>
+
+          <p class="story-card-body">
+            For years I’ve been chasing my first software role — building projects, breaking them,
+            fixing them, and leveling up. I wasn’t the first pick. Jobs passed on me. Others were
+            seen as “more qualified,” and for a while, I believed them.
+          </p>
+
+          <p class="story-card-body">
+            But I’m still here. I took the hits, went back to the lab, and kept learning: PHP, MySQL,
+            clean CRUD flows, late-night debugging after long shifts. I treat every bug like a round
+            in the ring — pressure, focus, execution.
+          </p>
+
+          <p class="story-card-body">
+            I’m not angry at the ones who passed on me — I’m determined. This time I’m bringing all 
+            my value to the surface: grit, resilience, and the mindset to learn whatever it takes 
+            to clear whatever obstacle is in front of me.
+          </p>
+
+          <p class="story-card-tagline">
+            This site isn’t a portfolio — it’s my <span>training log</span>.
+          </p>
+        </div>
+
+        <!-- RIGHT: STATS + CTA -->
+        <aside class="story-card-side">
+
+          <div class="story-stat">
+            <span class="story-stat-label">Years Grinding</span>
+            <span class="story-stat-value">4+</span>
+          </div>
+
+          <div class="story-stat">
+            <span class="story-stat-label">Stack</span>
+            <span class="story-stat-value">PHP · MySQL · LAMP</span>
+          </div>
+
+          <div class="story-stat">
+            <span class="story-stat-label">Mindset</span>
+            <span class="story-stat-value">Turning setbacks into software</span>
+          </div>
+
+          <div class="story-cta-row">
+            <a href="journey.html" class="story-binder-cta">watch the journey →</a>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       MISSION • FOCUS • LOCATION POSTERS
+  ============================================================ -->
+  <section id="mission" class="mission-focus-section ">
+
+    <div class="poster-grid">
+
+      <!-- MISSION POSTER -->
+      <article class="poster-card mission-card">
+        <div class="grain-overlay"></div>
+
+        <p class="poster-eyebrow">MISSION</p>
+
+        <h2 class="poster-title">
+          TURNING SETBACKS INTO <span>SOFTWARE.</span>
+        </h2>
+
+        <p class="poster-body">
+          I write code with the same discipline, grit, and focus that built me.
+          Every project is a round in the ring, and every bug is a chance to come back stronger.
+        </p>
+        <div class="mission-arrow-wrap">
+  <img 
+    src="images\mission_ascension_arrow.png" 
+    alt="Mission Arrow" 
+    class="mission-arrow"
+  />
+  <div class="arrow-energy"></div>
+</div>
+
+      </article>
+
+      <!-- FOCUS POSTER -->
+      <article id="focus" class="poster-card focus-card">
+        <div class="grain-overlay"></div>
+
+        <p class="poster-eyebrow">FOCUS</p>
+
+        <h2 class="poster-title">
+          THE FIVE PILLARS OF <span>TRAINMON.</span>
+        </h2>
+
+        <ul class="focus-list">
+          <li>
+            <h3>Front-end Development</h3>
+            <p>Cinematic, responsive interfaces that feel intentional and alive.</p>
+          </li>
+
+          <li>
+            <h3>UI / UX</h3>
+            <p>Layouts that respect the user: clear, readable, and smooth.</p>
+          </li>
+
+          <li>
+            <h3>Visual Storytelling Through Code</h3>
+            <p>Turning emotion and narrative into light, motion, and structure.</p>
+          </li>
+
+          <li>
+            <h3>Software Resilience & Maintainability</h3>
+            <p>Writing code that can take hits and still stand strong.</p>
+          </li>
+
+          <li>
+            <h3>Debugging & Troubleshooting</h3>
+            <p>Finding the real cause — not just patching the surface.</p>
+          </li>
+        </ul>
+      </article>
+
+      <!-- LOCATION POSTER -->
+      <article class="poster-card location-poster">
+  <div class="grain-overlay"></div>
+
+  <p class="poster-eyebrow">LOCATION</p>
+
+  <h2 class="poster-title">
+    COLUMBIA, <span>SOUTH CAROLINA</span>
+  </h2>
+
+  <!-- ⭐ Add the spinning globe right here -->
+  <div class="cinematic-gold-globe-wrap">
+    <img 
+      src="images\cinematic_gold_globe_clean.png" 
+      alt="Cinematic Gold Globe"
+      class="cinematic-gold-globe"
+    />
+  </div>
+
+  <p class="poster-body">Open to Remote</p>
+</article>
+</section>
+
+
+<!-- =============================
+     PROJECT SHOWCASE SECTION
+============================= -->
+<section class="project-showcase">
+
+  <h2 class="project-section-title">Featured Projects</h2>
+
+  <!-- PROJECT PANEL 1 -->
+  <div class="project-panel reveal">
+    
+    <!-- LEFT: Project Screenshot -->
+    <div class="project-image-wrap">
+      <img src="images\todo_main.png" 
+           alt="Todo App Preview"
+           class="project-image">
+    </div>
+
+    <!-- RIGHT: Project Info -->
+    <div class="project-info">
+      <h3 class="project-title">PHP Todo CRUD Application</h3>
+
+      <p class="project-desc">
+        A full CRUD task management system built with PHP, MySQL,
+        prepared statements, user authentication, and clean UI principles.
+        This project demonstrates backend logic, SQL architecture, 
+        debugging skill, and practical real-world software features.
+      </p>
+
+      <div class="project-buttons">
+        <a href="#" class="project-btn disabled">Live Demo Coming Soon</a>
+        <a href="https://github.com/Trainmon2/todo-crud-app" class="project-btn">View Code →</a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+ 
+  <script src="script.js"></script>
+</body>
+</html>
+
